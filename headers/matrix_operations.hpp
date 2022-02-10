@@ -1,50 +1,50 @@
-#ifndef MATRIX_OPERATIONS_H
-#define MATRIX_OPERATIONS_H
+#ifndef MATRIX_OPERATIONS_HPP
+#define MATRIX_OPERATIONS_HPP
 
 //функция для создания матрицы
-double** create_matrix(int n, int m);
+double** create_matrix(int str_count, int column_count);
 
 //функция для ввода матрицы A
-double** input_square_matrix(int n);
+double** input_square_matrix(int str_count);
 
 //функция для создания матрицы n*m
-double** input_matrix(int n, int m);
+double** input_matrix(int str_count, int column_count);
 
 //функция возведения матрицы в квадрат
-double** matrix_multiply(double** matrix1, double** matrix2, int n);
+double** matrix_multiply(double** matrix1, double** matrix2, int str_count);
 
 //функция суммирования матриц
-double** sum_of_matrixes(double** matrix1, double** matrix2, int n);
+double** sum_of_matrixes(double** matrix1, double** matrix2, int str_count);
 
 //функция суммирования матрицы и свободного числа 
-double** matrix_plus_free_number(double** matrix, int num, int n);
+double** matrix_plus_free_number(double** matrix, int num, int str_count);
 
 //функция нахождения разницы матрицы и свободного числа 
-double** matrix_minus_free_number(double** matrix, int num, int n);
+double** matrix_minus_free_number(double** matrix, int num, int str_count);
 
 //функция расчета разности матриц   
-double** difference_of_matrixes(double** matrix1, double** matrix2, int n);
+double** difference_of_matrixes(double** matrix1, double** matrix2, int str_count);
 
 //функция очистки двумерных массивов
-void cleaning_matrix(int n, double** matrix);
+void cleaning_matrix(int str_count, double** matrix);
 
 //функция вывода матрицы на экран
-void cout_matrix(double** matrix, int n);
+void cout_matrix(double** matrix, int str_count);
 
 //функция вывода для функции f
-void output_of_function_f(double** matrix, int n, double** matrix_sum_of_f);
+void output_of_function_f(double** matrix, int str_count, double** matrix_sum_of_f);
 
 //функция вывода для функции g
-void output_of_function_g(double** matrix, int n, double** matrix_sum_of_g);
+void output_of_function_g(double** matrix, int str_count, double** matrix_sum_of_g);
 
 //функция вывода разности функций f и g
-void difference_of_functions_f_and_g(int n, double** matrix);
+void difference_of_functions_f_and_g(int str_count, double** matrix);
 
 //функция для подсчета определителя
-int determinant_counter(int m, double** mas);
+int determinant_counter(int matrix_size, double** matrix);
 
 //функция для получения минора
-void get_new_smaller_matrix(double** mas, double** p, int i, int j, int m);
+void get_new_smaller_matrix(double** matrix, double** new_small_matrix, int i, int j, int matrix_size);
 
 //функция для поиска первого минора
 double** first_minor_counter(int length_of_matrix, int high_of_matrix, double** matrix_oroginal, double** matrix_minor, int& min1, int& min2, int& rank);
@@ -57,4 +57,4 @@ double** create_reverse_matrix(double** main_matrix, int matrix_size, double** m
 
 //функция для подсчета определителей миноров
 double** minor_determinant_counter(double** main_matrix, int matrix_size);
-#endif //MATRIX_OPERATIONS
+#endif //MATRIX_OPERATIONS_HPP
