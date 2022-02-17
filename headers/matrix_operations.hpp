@@ -17,10 +17,13 @@ double** matrix_multiply(double** matrix1, double** matrix2, int str_count);
 double** sum_of_matrixes(double** matrix1, double** matrix2, int str_count);
 
 //функция суммирования матрицы и свободного числа 
-double** matrix_plus_free_number(double** matrix, int num, int str_count);
+void matrix_plus_free_number(double** matrix, int num, int str_count);
 
 //функция нахождения разницы матрицы и свободного числа 
-double** matrix_minus_free_number(double** matrix, int num, int str_count);
+void matrix_minus_free_number(double** matrix, int num, int str_count);
+
+// Функция умножает квадратную матрицу на число.
+void matrix_multiply_namber(double** matrix, int matrix_size, int number);
 
 //функция расчета разности матриц   
 double** difference_of_matrixes(double** matrix1, double** matrix2, int str_count);
@@ -32,25 +35,28 @@ void cleaning_matrix(int str_count, double** matrix);
 void cout_matrix(double** matrix, int str_count);
 
 //функция вывода для функции f
-void output_of_function_f(double** matrix, int str_count, double** matrix_sum_of_f);
+void output_of_function_f(double** matrix, int str_count);
 
 //функция вывода для функции g
-void output_of_function_g(double** matrix, int str_count, double** matrix_sum_of_g);
+void output_of_function_g(double*** matrix, int str_count);
 
 //функция вывода разности функций f и g
-void difference_of_functions_f_and_g(int str_count, double** matrix);
+double** difference_of_functions_f_and_g(int str_count, double** matrix);
 
 //функция для подсчета определителя
 int determinant_counter(int matrix_size, double** matrix);
 
 //функция для получения минора
-void get_new_smaller_matrix(double** matrix, double** new_small_matrix, int i, int j, int matrix_size);
+void get_new_smaller_matrix(double** matrix, double** new_small_matrix, int i, int j, \
+							int matrix_size);
 
 //функция для поиска первого минора
-double** first_minor_counter(int length_of_matrix, int high_of_matrix, double** matrix_oroginal, double** matrix_minor, int& min1, int& min2, int& rank);
+double** first_minor_counter(int length_of_matrix, int high_of_matrix, double** matrix_oroginal, \
+							 double** matrix_minor, int& min1, int& min2, int& rank);
 
 //функция для поиска миноров 3-го порядка и более
-int minor_counter_for_rank(int length_of_matrix, int high_of_matrix, int min1, int min2, double** matrix, double** matrix_original);
+int minor_counter_for_rank(int length_of_matrix, int high_of_matrix, int min1, int min2, \
+						   double** matrix, double** matrix_original);
 
 //функция создания обратной матрицы
 double** create_reverse_matrix(double** main_matrix, int matrix_size, double** minors_determinant);

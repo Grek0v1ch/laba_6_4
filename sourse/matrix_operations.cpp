@@ -88,19 +88,26 @@ double** copy_matrix(double** matrix1, int str_count)
 }
 
 //функция суммирования матрицы и свободного числа 
-double** matrix_plus_free_number(double** matrix, int num, int str_count)
+void matrix_plus_free_number(double** matrix, int num, int str_count)
 {
 	for (int i1 = 0; i1 < str_count; i1++)
 		matrix[i1][i1] = matrix[i1][i1] + num;
-	return matrix;
 }
 
 //функция нахождения разницы матрицы и свободного числа 
-double** matrix_minus_free_number(double** matrix, int num, int str_count)
+void matrix_minus_free_number(double** matrix, int num, int str_count)
 {
 	for (int i1 = 0; i1 < str_count; i1++)
-		matrix[i1][i1] = num - matrix[i1][i1];
-	return matrix;
+		matrix[i1][i1] = matrix[i1][i1] - num;
+}
+
+// Функция умножает квадратную матрицу на число.
+void matrix_multiply_namber(double** matrix, int matrix_size, int number)
+{
+	for (int i = 0; i < matrix_size; i++)
+		for (int j = 0; j < matrix_size; j++)
+			matrix[i][j] *= number;
+	return;
 }
 
 //функция очистки двумерных массивов
@@ -124,7 +131,7 @@ void cout_matrix(double** matrix, int str_count)
 }
 
 //функция вывода для функции f
-void output_of_function_f(double** matrix, int str_count, double** matrix_sum_of_f)
+void output_of_function_f(double** matrix, int str_count, double*** matrix_sum_of_f)
 {
 	double** matrix_2nd_degree = matrix_multiply(matrix, matrix, str_count);
 	double** matrix_4th_degree = matrix_multiply(matrix_2nd_degree, matrix_2nd_degree, str_count);
@@ -132,16 +139,16 @@ void output_of_function_f(double** matrix, int str_count, double** matrix_sum_of
 	cout_matrix(matrix_4th_degree, str_count);
 	printf("A^2:\n");
 	cout_matrix(matrix_2nd_degree, str_count);
-	matrix_sum_of_f = sum_of_matrixes(matrix_4th_degree, matrix_2nd_degree, str_count);
-	matrix_sum_of_f = matrix_plus_free_number(matrix_sum_of_f, 1, str_count);
+	*matrix_sum_of_f = sum_of_matrixes(matrix_4th_degree, matrix_2nd_degree, str_count);
+	matrix_plus_free_number(*matrix_sum_of_f, 1, str_count);
 	printf("A^4+A^2+1=\n");
-	cout_matrix(matrix_sum_of_f, str_count);
+	cout_matrix(*matrix_sum_of_f, str_count);
 	cleaning_matrix(str_count, matrix_2nd_degree);
 	cleaning_matrix(str_count, matrix_4th_degree);
 }
 
 //функции вывода для функции g
-void output_of_function_g(double** matrix, int str_count, double** matrix_sum_of_g)
+void output_of_function_g(double** matrix, int str_count, double*** matrix_sum_of_g)
 {
 	double** matrix_3rd_degree = matrix_multiply(matrix, matrix, str_count);
 	matrix_3rd_degree = matrix_multiply(matrix_3rd_degree, matrix, str_count);
@@ -149,25 +156,26 @@ void output_of_function_g(double** matrix, int str_count, double** matrix_sum_of
 	cout_matrix(matrix_3rd_degree, str_count);
 	printf("A:\n");
 	cout_matrix(matrix, str_count);
-	matrix_sum_of_g = sum_of_matrixes(matrix_3rd_degree, matrix, str_count);
+	*matrix_sum_of_g = sum_of_matrixes(matrix_3rd_degree, matrix, str_count);
 	printf("A^3+A=\n");
-	cout_matrix(matrix_sum_of_g, str_count);
+	cout_matrix(*matrix_sum_of_g, str_count);
 	cleaning_matrix(str_count, matrix_3rd_degree);
 }
 
 //функция расчета разности между функциями f и g
-void difference_of_functions_f_and_g(int n, double** matrix)
+double** difference_of_functions_f_and_g(int matrix_size, double** matrix)
 {
-	double** matrix_sum_of_f = new double*[n];
-	double** matrix_sum_of_g = new double*[n];
-	output_of_function_f(matrix, n, matrix_sum_of_f);
-	output_of_function_g(matrix, n, matrix_sum_of_g);
-	double** matrix_dif_of_f_and_g = difference_of_matrixes(matrix_sum_of_f, matrix_sum_of_g, n);
+	double** matrix_sum_of_f = new double*[matrix_size];
+	double** matrix_sum_of_g = new double*[matrix_size];
+	output_of_function_f(matrix, matrix_size, &matrix_sum_of_f);
+	output_of_function_g(matrix, matrix_size, &matrix_sum_of_g);
+	cout_matrix(matrix_sum_of_f, matrix_size);
+	double** matrix_dif_of_f_and_g = difference_of_matrixes(matrix_sum_of_f, matrix_sum_of_g, matrix_size);
 	printf("f(A)-g(A)=\n");
-	cout_matrix(matrix_dif_of_f_and_g, n);
-	cleaning_matrix(n, matrix_sum_of_f);
-	cleaning_matrix(n, matrix_sum_of_g);
-	cleaning_matrix(n, matrix_dif_of_f_and_g);
+	cout_matrix(matrix_dif_of_f_and_g, matrix_size);
+	cleaning_matrix(matrix_size, matrix_sum_of_f);
+	cleaning_matrix(matrix_size, matrix_sum_of_g);
+	return matrix_dif_of_f_and_g;
 }
 
 // Получение матрицы без i-й строки и 0-го столбца
@@ -342,6 +350,6 @@ double** create_reverse_matrix(double** main_matrix, int matrix_size, double** m
 	for (int i = 0; i < matrix_size; i++)
 		for (int j = 0; j < matrix_size; j++) 
 			reverse_matrix[i][j] =  (pow(-1, i + j) * minors_determinant[j][i])/ determinant_of_main_matr;
-	cout_matrix(reverse_matrix, matrix_size);
+	// cout_matrix(reverse_matrix, matrix_size);
 	return reverse_matrix;
 }
