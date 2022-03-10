@@ -326,7 +326,7 @@ int minor_counter_for_rank(int length_of_matrix, int high_of_matrix, int ordinal
 	return rank;
 }
 
-//функция для подсчета определителей миноров
+//функция для подсчета определителей миноров 
 double** minor_determinant_counter(double** main_matrix, int matrix_size)
 {
 	double** minors_determinant = create_matrix(matrix_size, matrix_size);
@@ -347,6 +347,11 @@ double** create_reverse_matrix(double** main_matrix, int matrix_size, double** m
 {
 	double determinant_of_main_matr = determinant_counter(matrix_size, main_matrix);
 	double** reverse_matrix = create_matrix(matrix_size, matrix_size);
+	if (matrix_size == 1)
+	{
+		reverse_matrix[0][0] = 1.0 / determinant_of_main_matr;
+		return reverse_matrix;
+	}
 	for (int i = 0; i < matrix_size; i++)
 		for (int j = 0; j < matrix_size; j++) 
 			reverse_matrix[i][j] =  (pow(-1, i + j) * minors_determinant[j][i])/ determinant_of_main_matr;

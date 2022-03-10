@@ -16,6 +16,11 @@ int main() {
 	printf("\nВычисление матрицы B': \n");
 	double** matrixB2 = difference_of_functions_f_and_g(matrix_size, matrix_temp);
 
+	// Раскоментировать для тестирования второго блока.
+	/*
+		cleaning_matrix(matrix_size, matrixA2);
+		matrixA2 = input_matrix(matrix_size, matrix_size);
+	*/
 	int ordinal_num_in_line_1, ordinal_num_in_line_2, rank = 1;
 	double** matrix_minor = create_matrix(matrix_size, matrix_size);
 	first_minor_counter(matrix_size, matrix_size, matrixA2, matrix_minor, ordinal_num_in_line_1, \
@@ -25,6 +30,13 @@ int main() {
 	    	                          ordinal_num_in_line_2, matrix_minor, matrixA2);
 	printf("\nРанг матрицы A' равен: %d\n\n", rank);
 
+	// Раскоментировать для тестирования третьего блока.
+	/*
+		cleaning_matrix(matrix_size, matrixA2);
+		cleaning_matrix(matrix_size, matrixB2);
+		matrixA2 = input_matrix(matrix_size, matrix_size);
+		matrixB2 = input_matrix(matrix_size, matrix_size);
+	*/
 	// 4 - свободный член
 	printf("Решние матричного уравнения 4*X - A'*X = B'\n");
     matrix_minus_free_number(matrixA2, 4, matrix_size);
