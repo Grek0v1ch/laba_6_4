@@ -4,23 +4,23 @@
 * f(x)=x^4+x^2+1 g(x)=x^3+x f(A)-g(A)
 */
 #include <iostream>
-#include <windows.h>
+// #include <windows.h>
 #include <string>
-#include "matrix_operations.h"
-#include "checking_operations.h"
+#include "matrix_operations.hpp"
+#include "checking_operations.hpp"
 using namespace std;
 
 int main()
 {
 	//размер матрицы
 	int dimension_of_matrix;
-	setlocale(0, "RUS");
+	// setlocale(0, "RUS");
 	cout << "Введите размер квадратной матрицы:" << endl;
 	correct_input_matrix_dimension(dimension_of_matrix);
 	double** matrix = input_matrix(dimension_of_matrix, dimension_of_matrix);
 	difference_of_functions_f_and_g(dimension_of_matrix, matrix);
 	cleaning_matrix(dimension_of_matrix, matrix);
-	system("pause");
+	// system("pause");
 	return 0;
 }
 /*

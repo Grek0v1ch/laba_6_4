@@ -63,4 +63,7 @@ double** create_reverse_matrix(double** main_matrix, int matrix_size, double** m
 
 //функция для подсчета определителей миноров
 double** minor_determinant_counter(double** main_matrix, int matrix_size);
+
+// Функция решает матричное уравнения 4*X - A*X = B
+bool equation_solution(double** matrixA, double** matrixB, int matrix_size, double** answer);
 #endif //MATRIX_OPERATIONS_HPP

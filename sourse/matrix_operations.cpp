@@ -77,14 +77,12 @@ double** difference_of_matrixes(double** matrix1, double** matrix2, int str_coun
 	return dif_of_matrix;
 }
 
-//функция копирования матрицы
-double** copy_matrix(double** matrix1, int str_count)
+// Функция копирует матрицу matrix_src в матрицу matrix_dst (размеры матриц должны совпадать).
+void copy_matrix(double** matrix_dst, double** matrix_src, int str_count, int column_count) 
 {
-	double** copied_matrix = create_matrix(str_count, str_count);
-	for (int i1 = 0; i1 < str_count; i1++)
-		for (int i2 = 0; i2 < str_count; i2++)
-			copied_matrix[i1][i2] = matrix1[i1][i2];
-	return copied_matrix;
+	for (int i = 0; i < str_count; i++)
+		for (int j = 0; j < column_count; j++)
+			matrix_dst[i][j] = matrix_src[i][j];
 }
 
 //функция суммирования матрицы и свободного числа 
@@ -357,4 +355,23 @@ double** create_reverse_matrix(double** main_matrix, int matrix_size, double** m
 			reverse_matrix[i][j] =  (pow(-1, i + j) * minors_determinant[j][i])/ determinant_of_main_matr;
 	// cout_matrix(reverse_matrix, matrix_size);
 	return reverse_matrix;
+}
+
+// Функция решает матричное уравнения 4*X - A*X = B
+bool equation_solution(double** matrixA, double** matrixB, int matrix_size, double** answer)
+{
+    matrix_minus_free_number(matrixA, 4, matrix_size);
+    matrix_multiply_namber(matrixA, matrix_size, -1);
+	double** minors_determinant = minor_determinant_counter(matrixA, matrix_size);
+	double det_matrix = determinant_counter(matrix_size, matrixA);
+	if (det_matrix == 0) {
+		return false;
+	}
+	double** matrix_reverse = create_reverse_matrix(matrixA, matrix_size, minors_determinant);
+	double** matrix_temp = matrix_multiply(matrix_reverse, matrixB, matrix_size);
+	copy_matrix(answer, matrix_temp, matrix_size, matrix_size);
+	cleaning_matrix(matrix_size, minors_determinant);
+	cleaning_matrix(matrix_size, matrix_reverse);
+	cleaning_matrix(matrix_size, matrix_temp);
+	return true;
 }
